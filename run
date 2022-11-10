@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python -m grpc_tools.protoc -I protos --python_out=. --grpc_python_out=. protos/data_stream_service.proto
+
+# run server
+dir="$(pwd)"
+echo "------------------Starting the server-------------------"
+python $dir/db/load_demo_data.py
+python data_stream_server.py

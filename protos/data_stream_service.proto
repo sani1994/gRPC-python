@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+// The greeting service definition.
+service DataStream {
+	// single object return
+	rpc GetUserByID (ID) returns (UserData);
+
+	//list of object
+	rpc GetUserList(UserRequest) returns (UserDataList);
+
+//	// streaming from server side to clinet side.
+//	rpc GetUserListstream(UserRequest) returns (stream UserDataList);
+//
+//	// syncronise streaming from both server and client side.
+//	rpc GetUserListstream(stream UserRequest) returns (stream UserDataList);
+}
+
+message UserRequest{
+	string list = 1;
+}
+
+message ID{
+	int32 id = 1;
+}
+message UserData{
+  ID id = 1;
+	string name = 2;
+	string username = 3;
+	string email = 4;
+	string phone_number =5;
+	string modified = 6;
+	string created = 7;
+}
+message UserDataList{
+	repeated UserData list = 1;
+}
+
+
